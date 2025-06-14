@@ -25,12 +25,12 @@ import (
 	"strings"
 	"time"
 
-	"github.com/okta/okta-jwt-verifier-golang/v2/adaptors"
-	"github.com/okta/okta-jwt-verifier-golang/v2/adaptors/lestrratGoJwx"
-	"github.com/okta/okta-jwt-verifier-golang/v2/discovery"
-	"github.com/okta/okta-jwt-verifier-golang/v2/discovery/oidc"
-	"github.com/okta/okta-jwt-verifier-golang/v2/errors"
-	"github.com/okta/okta-jwt-verifier-golang/v2/utils"
+	"github.com/hung12ct/okta-jwt-verifier-golang/v2/adaptors"
+	"github.com/hung12ct/okta-jwt-verifier-golang/v2/adaptors/lestrratGoJwx"
+	"github.com/hung12ct/okta-jwt-verifier-golang/v2/discovery"
+	"github.com/hung12ct/okta-jwt-verifier-golang/v2/discovery/oidc"
+	"github.com/hung12ct/okta-jwt-verifier-golang/v2/errors"
+	"github.com/hung12ct/okta-jwt-verifier-golang/v2/utils"
 )
 
 var (
@@ -345,8 +345,11 @@ func (j *JwtVerifier) validateIat(iat interface{}) error {
 }
 
 func (j *JwtVerifier) validateIss(issuer interface{}) error {
-	if issuer != j.Issuer {
-		return fmt.Errorf("iss: %s does not match %s", issuer, j.Issuer)
+	normalizedIssuer := normalizeIssuer(issuer)
+	expectedIssuer := normalizeIssuer(j.Issuer)
+
+	if normalizedIssuer != expectedIssuer {
+		return fmt.Errorf("iss: %s does not match %s", normalizedIssuer, expectedIssuer)
 	}
 	return nil
 }
@@ -414,4 +417,9 @@ func padHeader(header string) string {
 		header += strings.Repeat("=", 4-i)
 	}
 	return header
+}
+
+func normalizeIssuer(s interface{}) string {
+	str := fmt.Sprintf("%v", s)
+	return strings.TrimRight(str, "/")
 }

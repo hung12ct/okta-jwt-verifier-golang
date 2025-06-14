@@ -23,10 +23,10 @@ import (
 	"net/http"
 	"time"
 
+	"github.com/hung12ct/okta-jwt-verifier-golang/v2/adaptors"
+	"github.com/hung12ct/okta-jwt-verifier-golang/v2/utils"
 	"github.com/lestrrat-go/jwx/v2/jwk"
 	"github.com/lestrrat-go/jwx/v2/jws"
-	"github.com/okta/okta-jwt-verifier-golang/v2/adaptors"
-	"github.com/okta/okta-jwt-verifier-golang/v2/utils"
 )
 
 func (lgj *LestrratGoJwx) fetchJwkSet(jwkUri string) (interface{}, error) {

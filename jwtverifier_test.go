@@ -30,10 +30,10 @@ import (
 	"testing"
 	"time"
 
+	"github.com/hung12ct/okta-jwt-verifier-golang/v2/adaptors/lestrratGoJwx"
+	"github.com/hung12ct/okta-jwt-verifier-golang/v2/discovery/oidc"
+	"github.com/hung12ct/okta-jwt-verifier-golang/v2/utils"
 	"github.com/jarcoal/httpmock"
-	"github.com/okta/okta-jwt-verifier-golang/v2/adaptors/lestrratGoJwx"
-	"github.com/okta/okta-jwt-verifier-golang/v2/discovery/oidc"
-	"github.com/okta/okta-jwt-verifier-golang/v2/utils"
 	"github.com/stretchr/testify/require"
 )
 
